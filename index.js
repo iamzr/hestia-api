@@ -1,9 +1,14 @@
 const express = require("express");
+const spawn = require("child_process").spawn;
 
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("<h2>halll</h2>");
+  const pythonProcess = spawn("python3", ["./script.py"]);
+
+  pythonProcess.stdout.on("data", (data) => {
+    res.send(`<p>${data}</p>`);
+  });
 });
 
 const port = process.env.PORT || 3000;
