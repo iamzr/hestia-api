@@ -10,3 +10,6 @@ services:
     env_file:
       - ./.env
     command: node index.js
+    volumes:
+      - ./:/app
+      - /app/node_modules

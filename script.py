@@ -1,4 +1,4 @@
 import sys
 from hestia_earth.utils.table import pivot_csv
 
-print(pivot_csv("./sample.csv").to_string())
+print(pivot_csv(sys.argv[1]).to_string())
