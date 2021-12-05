@@ -15,7 +15,7 @@ export const options = {
 export default function() {
   const fd = new FormData();
 
-  const res = http.post("http://localhost:3000", {
+  const res = http.post("http://node-app:3000", {
     headers: {
       "Content-Type": "multipart/form-data; boundary=" + fd.boundary,
     },
