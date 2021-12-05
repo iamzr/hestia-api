@@ -16,12 +16,12 @@ export default function() {
   const fd = new FormData();
 
   const res = http.post("http://localhost:3000", {
-    headers: { "Content-Type": "multipart/form-data; boundary=" + fd.boundary },
+    headers: {
+      "Content-Type": "multipart/form-data; boundary=" + fd.boundary,
+    },
   });
   check(res, {
     "is status 400": (r) => r.status === 400,
-  });
-  check(res, {
     "error message": (r) => r.body == "Please upload a CSV file!",
   });
 }
