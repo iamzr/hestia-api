@@ -12,5 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Run docker-compose
+      - run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
