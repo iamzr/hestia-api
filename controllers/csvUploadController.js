@@ -1,9 +1,20 @@
 const fs = require("fs");
 const csv = require("fast-csv");
+const uploadFile = require("../middlewares/upload").single("file");
 
 const spawn = require("child_process").spawn;
 
-const upload = async (req, res) => {
+const upload = (req, res, next) =>
+  uploadFile(req, res, function(err) {
+    if (err) {
+      return res.status(400).send(`${err.message}`);
+    }
+    // console.log("passed to next");
+    next();
+  });
+
+const runPyScript = async (req, res) => {
+  // console.log("runPyscript");
   try {
     if (req.file == undefined) {
       return res.status(400).send("Please upload a CSV file!");
@@ -13,29 +24,12 @@ const upload = async (req, res) => {
     const pythonProcess = spawn("python3", ["./script.py", path]);
 
     pythonProcess.stdout.on("data", (data) => {
-      res.send(`<p>${data}</p>`);
+      res.status(200).send(`${data}`);
     });
-    // let fileRows = [];
-    // let path = "/tmp/csv/" + req.file.filename;
-
-    // fs.createReadStream(path)
-    //   .pipe(csv.parse({ headers: true }))
-    //   .on("error", (error) => {
-    //     throw error.message;
-    //   })
-    //   .on("data", (row) => {
-    //     fileRows.push(row);
-    //   })
-    //   .on("end", () => {
-    //     // res.send("done");
-
-    //   });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
-      message: "Could not upload the file: " + req.file.originalname,
-    });
+    res.status(500).send(`Could not upload the file: ${req.file.originalname}`);
   }
 };
 
-module.exports = upload;
+module.exports = { upload, runPyScript };
