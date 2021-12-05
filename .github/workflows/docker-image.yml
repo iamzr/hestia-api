@@ -7,15 +7,10 @@ on:
     branches: [main]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-
-      - name: Run local k6 test
-        uses: k6io/action@v0.1
-        with:
-          filename: tests/emptyRequest.js
