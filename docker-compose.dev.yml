@@ -11,8 +11,3 @@ services:
     environment:
       - NODE_ENV=development
     command: npm run dev
-
-  k6:
-    image: loadimpact/k6:latest
-    environment:
-      - ENV=ENV
