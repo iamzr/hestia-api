@@ -27,8 +27,17 @@ jobs:
         run: |
           curl https://github.com/loadimpact/k6/releases/download/v0.26.2/k6-v0.26.2-linux64.tar.gz -L | tar xvz --strip-components 1
 
+      - name: Install packages
+        run: |
+          npm install
+
       - name: Run docker-compose. Build the Docker image
         run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+      - name: Start server and run tests
+        run: |
+          npm start & npx wait-on http://localhost:3000
+          ./k6 run test.js
 
       - name: Run sampleCSV test
         run: wait-on http://localhost:3000
