@@ -5,16 +5,16 @@ on:
   pull_request:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - name: Run docker-compose. Build the Docker image
-        run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d
-      # - name: Build the Docker image
-      # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+#       - name: Run docker-compose. Build the Docker image
+#         run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d
+#       # - name: Build the Docker image
+#       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
   load-test:
     runs-on: ubuntu-latest
