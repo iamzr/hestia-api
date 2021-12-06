@@ -5,12 +5,9 @@ import { FormData } from "https://jslib.k6.io/formdata/0.0.2/index.js";
 const txt = open("./test");
 
 export const options = {
-  duration: "1s",
-  vus: 5,
   thresholds: {
-    http_req_duration: ["p(50)<500"],
-    http_req_duration: ["p(95)<1000"],
-    http_req_failed: ["rate=1"],
+    http_req_failed: ["rate>0.99"],
+    checks: ["rate > 0.99"],
   },
 };
 
