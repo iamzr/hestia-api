@@ -31,7 +31,8 @@ jobs:
         run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
       - name: Run sampleCSV test
-        run: ./k6 run tests/sampleCSVTest.js
+        run: wait-on http://localhost:3000
+          ./k6 run tests/sampleCSVTest.js
 
       - name: Run notCSV test
         run: ./k6 run tests/notCSVTest.js
