@@ -3,14 +3,18 @@ from hestia_earth.utils.table import pivot_csv
 import csv
 from io import StringIO
 
-table = pivot_csv(sys.argv[1])
+try:
+    table = pivot_csv(sys.argv[1])
 
-# creating empty stream
-buffer = StringIO()
+    # creating empty stream
+    buffer = StringIO()
 
-# adding data to stream
-table.to_csv(buffer, index =False)
+    # adding data to stream
+    table.to_csv(buffer, index =False)
 
-# printing stream
-print(buffer.getvalue())
+    # printing stream
+    print(buffer.getvalue())
 
+except Exception as e:
+    print(str(e), file=sys.stderr)
+    # print(str(e))
