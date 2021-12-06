@@ -20,10 +20,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Run docker-compose. Build the Docker image
         run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
       - name: Run local k6 test
         uses: k6io/action@v0.1
         with:
-          filename: tests/sampleCSV.js
+          filename: tests/tests/sampleCSV.js
