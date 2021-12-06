@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "ea6e70b0-66ab-4999-a9fb-f8736877f3de",
+		"name": "Hestia-api Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sample.csv upload test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check for a 200 status\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response is a string\", function () {",
+							"    pm.response.to.be.string;",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"56.184377\");",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(`cycle.id,cycle.name,cycle.dataDescription,cycle.endDate,cycle.startDate,cycle.startDateDefinition,cycle.cycleDuration,cycle.functionalUnitMeasure,cycle.schemaVersion,cycle.dataPrivate,cycle.site.id,cycle.defaultSource.id,cycle.dataCompleteness.electricityFuel,cycle.dataCompleteness.material,cycle.dataCompleteness.fertilizer,cycle.dataCompleteness.other,cycle.dataCompleteness.pesticidesAntibiotics,cycle.dataCompleteness.soilAmendments,cycle.dataCompleteness.water,cycle.dataCompleteness.products,cycle.dataCompleteness.coProducts,cycle.dataCompleteness.cropResidue,cycle.dataCompleteness.manureManagement,cycle.inputs.ureaAsN.value,cycle.inputs.inorganicPhosphorusFertilizerUnspecifiedAsP2O5.value,cycle.inputs.inorganicPotassiumFertilizerUnspecifiedAsK2O.value,cycle.inputs.diesel.value,cycle.products.peanutInHull.value,cycle.practices.fullTillage.value",
+							"Small,\"Peanut, in hull - Astaneh-ye-Ashrafiyeh, Iran - 2012\",No emissions data. Partial data on inputs and products. Site measurements available.,2012,2011,harvest of previous crop,365,1 ha,2.16.0,False,Small,1,True,False,True,False,False,True,True,True,True,False,True,48.59624,25.988424,15.937152,86.90678908,3018.4,-",
+							"Medium,\"Peanut, in hull - Astaneh-ye-Ashrafiyeh, Iran - 2012\",No emissions data. Partial data on inputs and products. Site measurements available.,2012,2011,harvest of previous crop,365,1 ha,2.16.0,False,Medium,1,True,False,True,False,False,True,True,True,True,False,True,52.3439,26.32,12.1401,81.48573128,3290.0,-",
+							"Large,\"Peanut, in hull - Astaneh-ye-Ashrafiyeh, Iran - 2012\",No emissions data. Partial data on inputs and products. Site measurements available.,2012,2011,harvest of previous crop,365,1 ha,2.16.0,False,Large,1,True,False,True,False,False,True,True,True,True,False,True,56.184377,17.902705,41.393731,78.45703088,3346.3,-",
+							"",
+							"`);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/zia/TOP/hestia-api/tests/sample.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Not a csv file",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"This is not a CSV file. Please upload a CSV file.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/csv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/zia/TOP/hestia-api/tests/test"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Empty request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"Please upload a CSV file!\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

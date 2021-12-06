@@ -34,20 +34,8 @@ jobs:
       - name: Run docker-compose. Build the Docker image
         run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
-      - name: Start server and run tests
-        run: |
-          npm start & npx wait-on http://localhost:3000
-          ./k6 run tests/sampleCSVTest.js
+      - name: Install newman
+        run: npm install -g newman
 
-      # - name: Run sampleCSV test
-      #   run: wait-on http://localhost:3000
-      #     ./k6 run tests/sampleCSVTest.js
-
-      - name: Run notCSV test
-        run: ./k6 run tests/notCSVTest.js
-
-      - name: Run emptyRequest test
-        run: ./k6 run tests/emptyRequestTest.js
-
-      - name: Run load test
-        run: ./k6 run tests/loadTest.js
+      - name: Run tests
+        run: newman run "tests/Hestia-api Tests.postman_collection.json"
