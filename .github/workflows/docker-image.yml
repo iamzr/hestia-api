@@ -31,6 +31,4 @@ jobs:
         run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
       - name: Run tests
-        run: |
-          npx wait-on http://localhost:3000
-          ./k6 run tests/sampleCSVTest.js
+        run: ./k6 run tests/sampleCSVTest.js
