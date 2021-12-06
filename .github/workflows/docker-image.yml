@@ -16,7 +16,14 @@ jobs:
       # - name: Build the Docker image
       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
+  load-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run docker-compose. Build the Docker image
+        run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
       - name: Run local k6 test
         uses: k6io/action@v0.1
         with:
-          filename: tests/emptyRequest.js
+          filename: tests/sampleCSV.js
