@@ -16,7 +16,7 @@ jobs:
   #       # - name: Build the Docker image
   #       # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
-  load-test:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,5 +30,14 @@ jobs:
       - name: Run docker-compose. Build the Docker image
         run: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
-      - name: Run tests
+      - name: Run sampleCSV test
         run: ./k6 run tests/sampleCSVTest.js
+
+      - name: Run notCSV test
+        run: ./k6 run tests/notCSVTest.js
+
+      - name: Run emptyRequest test
+        run: ./k6 run tests/emptyRequestTest.js
+
+      - name: Run load test
+        run: ./k6 run tests/loadTest.js
