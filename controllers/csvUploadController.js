@@ -10,7 +10,7 @@ const upload = (req, res, next) =>
       if (err.code == 415) {
         return res.status(415).send(`${err.message}`);
       } else {
-        return res.status.send(`${err.message}`);
+        return res.status(400).send(`${err.message}`);
       }
     }
     next();
