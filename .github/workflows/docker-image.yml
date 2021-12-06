@@ -37,11 +37,11 @@ jobs:
       - name: Start server and run tests
         run: |
           npm start & npx wait-on http://localhost:3000
-          ./k6 run test.js
-
-      - name: Run sampleCSV test
-        run: wait-on http://localhost:3000
           ./k6 run tests/sampleCSVTest.js
+
+      # - name: Run sampleCSV test
+      #   run: wait-on http://localhost:3000
+      #     ./k6 run tests/sampleCSVTest.js
 
       - name: Run notCSV test
         run: ./k6 run tests/notCSVTest.js
