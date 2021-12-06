@@ -28,4 +28,4 @@ jobs:
       - name: Run local k6 test
         uses: k6io/action@v0.1
         with:
-          filename: tests/tests/sampleCSV.js
+          filename: tests/sampleCSV.js
