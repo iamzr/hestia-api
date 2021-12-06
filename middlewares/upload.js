@@ -14,15 +14,15 @@ const csvFilter = (req, file, cb) => {
   }
 };
 
-var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "/tmp/csv");
-  },
-  filename: (req, file, cb) => {
-    console.log(file.originalname);
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
+// var storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "/tmp/csv");
+//   },
+//   filename: (req, file, cb) => {
+//     console.log(file.originalname);
+//     cb(null, `${Date.now()}-${file.originalname}`);
+//   },
+// });
 
 var uploadFile = multer({ dest: "/tmp/csv", fileFilter: csvFilter });
 

@@ -20,7 +20,7 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-// Routes
+// Routers
 const indexRouter = require("./routes/index");
 
 const app = express();

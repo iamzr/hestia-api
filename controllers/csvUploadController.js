@@ -13,7 +13,6 @@ const upload = (req, res, next) =>
         return res.status.send(`${err.message}`);
       }
     }
-    // console.log("passed to next");
     next();
   });
 
