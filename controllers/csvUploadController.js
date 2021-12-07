@@ -1,11 +1,9 @@
-const fs = require("fs");
-const csv = require("fast-csv");
 const uploadFile = require("../middlewares/upload").single("file");
 
 const spawn = require("child_process").spawn;
 
 const upload = (req, res, next) =>
-  uploadFile(req, res, function(err) {
+  uploadFile(req, res, function (err) {
     if (err) {
       if (err.code == 415) {
         return res.status(415).send(`${err.message}`);
@@ -25,7 +23,7 @@ const runPyScript = async (req, res) => {
     let path = "/tmp/csv/" + req.file.filename;
     const pythonProcess = spawn("python3", ["./script.py", path]);
 
-    pythonProcess.stderr.on("data", function(data) {
+    pythonProcess.stderr.on("data", function (data) {
       console.log(data);
       res
         .status(500)
