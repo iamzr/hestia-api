@@ -5,8 +5,8 @@ import { FormData } from "https://jslib.k6.io/formdata/0.0.2/index.js";
 const txt = open("./sample.csv");
 
 export const options = {
-  duration: "10s",
-  vus: 500,
+  duration: "1m",
+  vus: 50,
   thresholds: {
     checks: ["rate>0.99"],
     http_req_failed: ["rate<0.001"],
